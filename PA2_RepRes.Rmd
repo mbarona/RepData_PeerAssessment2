@@ -115,7 +115,7 @@ Sorting the data and extracting the top 10 results
 ```{r}
 #sorting
 totalFatalities <- totalFatalities[order(totalFatalities$total, decreasing = TRUE),]
-totalInjuries <- totalFatalities[order(totalInjuries$total, decreasing = TRUE),]
+totalInjuries <- totalInjuries[order(totalInjuries$total, decreasing = TRUE),]
 damages_sort <- damages[order(damages$totalDamages, decreasing = TRUE),]
 
 #top 10
