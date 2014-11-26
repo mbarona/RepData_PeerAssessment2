@@ -205,7 +205,7 @@ Sorting the data and extracting the top 10 results
 ```r
 #sorting
 totalFatalities <- totalFatalities[order(totalFatalities$total, decreasing = TRUE),]
-totalInjuries <- totalFatalities[order(totalInjuries$total, decreasing = TRUE),]
+totalInjuries <- totalInjuries[order(totalInjuries$total, decreasing = TRUE),]
 damages_sort <- damages[order(damages$totalDamages, decreasing = TRUE),]
 
 #top 10
@@ -245,17 +245,17 @@ injuries
 ```
 
 ```
-##                       EVTYPE total
-## 132                    SMOKE     0
-## 98  MARINE THUNDERSTORM WIND    10
-## 48                    FREEZE     0
-## 137             SNOW SHOWERS     0
-## 128     SEVERE THUNDERSTORMS     0
-## 22     CSTL FLOODING/EROSION     0
-## 2                FLASH FLOOD     0
-## 178             VOLCANIC ASH     0
-## 79                 HURRICANE     4
-## 15                BRUSH FIRE     0
+##                EVTYPE total
+## 152           TORNADO 15213
+## 36     EXCESSIVE HEAT  3708
+## 93          LIGHTNING  2993
+## 156         TSTM WIND  1753
+## 148 THUNDERSTORM WIND  1400
+## 80  HURRICANE/TYPHOON  1275
+## 67               HEAT  1222
+## 185          WILDFIRE   911
+## 45        FLASH FLOOD   812
+## 78          HIGH WIND   677
 ```
 
 

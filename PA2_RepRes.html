@@ -194,7 +194,7 @@ damages$totalDamages &lt;- damages$totalC + damages$totalP</code></pre>
 <p>Sorting the data and extracting the top 10 results</p>
 <pre class="r"><code>#sorting
 totalFatalities &lt;- totalFatalities[order(totalFatalities$total, decreasing = TRUE),]
-totalInjuries &lt;- totalFatalities[order(totalInjuries$total, decreasing = TRUE),]
+totalInjuries &lt;- totalInjuries[order(totalInjuries$total, decreasing = TRUE),]
 damages_sort &lt;- damages[order(damages$totalDamages, decreasing = TRUE),]
 
 #top 10
@@ -221,17 +221,17 @@ damages1 &lt;- damages_sort[1:10,]</code></pre>
 ## 148 THUNDERSTORM WIND   130</code></pre>
 <p><strong>No. of Injuries - Top 10 Event Types with Highest No. of Injuries</strong></p>
 <pre class="r"><code>injuries</code></pre>
-<pre><code>##                       EVTYPE total
-## 132                    SMOKE     0
-## 98  MARINE THUNDERSTORM WIND    10
-## 48                    FREEZE     0
-## 137             SNOW SHOWERS     0
-## 128     SEVERE THUNDERSTORMS     0
-## 22     CSTL FLOODING/EROSION     0
-## 2                FLASH FLOOD     0
-## 178             VOLCANIC ASH     0
-## 79                 HURRICANE     4
-## 15                BRUSH FIRE     0</code></pre>
+<pre><code>##                EVTYPE total
+## 152           TORNADO 15213
+## 36     EXCESSIVE HEAT  3708
+## 93          LIGHTNING  2993
+## 156         TSTM WIND  1753
+## 148 THUNDERSTORM WIND  1400
+## 80  HURRICANE/TYPHOON  1275
+## 67               HEAT  1222
+## 185          WILDFIRE   911
+## 45        FLASH FLOOD   812
+## 78          HIGH WIND   677</code></pre>
 </div>
 <div id="top-10-storms-and-weather-events-in-the-united-states-with-the-greatest-economic-consequences-in-terms-of-crop-and-property-damages" class="section level3">
 <h3>Top 10 Storms and Weather Events in the United States with the Greatest Economic Consequences in terms of Crop and Property Damages</h3>
