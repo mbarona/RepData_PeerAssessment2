@@ -128,16 +128,20 @@ damages1 <- damages_sort[1:10,3]
 
 ### Top 10 Storms and Weather Events in the United States with the Most Harmful Effects to Population Health
 
-**No. of Fatalities**
-**`r fatalities`**
+**No. of Fatalities - Top 10 Event Types with Highest No. of Fatalities**
+```{r}
+fatalities
+```
 
-**No. of Injuries**
-**`r injuries`**
+**No. of Injuries - Top 10 Event Types with Highest No. of Injuries**
+```{r}
+injuries
+```
+
 
 ### Top 10 Storms and Weather Events in the United States with the Greatest Economic Consequences in terms of Crop and Property Damages
 
-**Total Crop and Property Damages**
-**`r damages1`**
+**Total Crop and Property Damages - Top 10 Highest Event Types with Highest Damages**
 ```{r}
-
+damages1
 ```
