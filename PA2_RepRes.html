@@ -200,7 +200,7 @@ damages_sort &lt;- damages[order(damages$totalDamages, decreasing = TRUE),]
 #top 10
 fatalities &lt;- totalFatalities[1:10,]
 injuries &lt;- totalInjuries[1:10,]
-damages1 &lt;- damages_sort[1:10,3]</code></pre>
+damages1 &lt;- damages_sort[1:10,]</code></pre>
 </div>
 <div id="results" class="section level2">
 <h2>Results</h2>
@@ -237,8 +237,17 @@ damages1 &lt;- damages_sort[1:10,3]</code></pre>
 <h3>Top 10 Storms and Weather Events in the United States with the Greatest Economic Consequences in terms of Crop and Property Damages</h3>
 <p><strong>Total Crop and Property Damages - Top 10 Highest Event Types with Highest Damages</strong></p>
 <pre class="r"><code>damages1</code></pre>
-<pre><code>##  [1] 3007889.6 2734612.5 2589295.0 2435922.6 2030015.7 1367349.8 1187856.4
-##  [8]  744730.0  292575.5  252663.4</code></pre>
+<pre><code>##                EVTYPE    totalC    totalP totalDamages
+## 45        FLASH FLOOD 265536.39 3007889.6    3273426.0
+## 152           TORNADO 147431.22 2734612.5    2882043.8
+## 148 THUNDERSTORM WIND 133658.00 2589295.0    2722953.0
+## 156         TSTM WIND 107731.75 2435922.6    2543654.4
+## 46              FLOOD 245744.46 2030015.7    2275760.1
+## 64               HAIL 727981.34 1367349.8    2095331.1
+## 93          LIGHTNING   2827.20 1187856.4    1190683.6
+## 78          HIGH WIND  24345.86  744730.0     769075.9
+## 191      WINTER STORM   1306.00  292575.5     293881.5
+## 185          WILDFIRE   9019.80  252663.4     261683.2</code></pre>
 </div>
 </div>
 

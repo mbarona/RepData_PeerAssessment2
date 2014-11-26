@@ -211,7 +211,7 @@ damages_sort <- damages[order(damages$totalDamages, decreasing = TRUE),]
 #top 10
 fatalities <- totalFatalities[1:10,]
 injuries <- totalInjuries[1:10,]
-damages1 <- damages_sort[1:10,3]
+damages1 <- damages_sort[1:10,]
 ```
 
 ## Results
@@ -268,6 +268,15 @@ damages1
 ```
 
 ```
-##  [1] 3007889.6 2734612.5 2589295.0 2435922.6 2030015.7 1367349.8 1187856.4
-##  [8]  744730.0  292575.5  252663.4
+##                EVTYPE    totalC    totalP totalDamages
+## 45        FLASH FLOOD 265536.39 3007889.6    3273426.0
+## 152           TORNADO 147431.22 2734612.5    2882043.8
+## 148 THUNDERSTORM WIND 133658.00 2589295.0    2722953.0
+## 156         TSTM WIND 107731.75 2435922.6    2543654.4
+## 46              FLOOD 245744.46 2030015.7    2275760.1
+## 64               HAIL 727981.34 1367349.8    2095331.1
+## 93          LIGHTNING   2827.20 1187856.4    1190683.6
+## 78          HIGH WIND  24345.86  744730.0     769075.9
+## 191      WINTER STORM   1306.00  292575.5     293881.5
+## 185          WILDFIRE   9019.80  252663.4     261683.2
 ```
