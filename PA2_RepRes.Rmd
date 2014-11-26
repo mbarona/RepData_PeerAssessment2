@@ -53,7 +53,7 @@ str(df1)
 
 #first time the event was recorded in the database
 library(plyr)
-startdate <- ddply(df1, EVTYPE, summarise, min = min(BGN_DATE, na.rm = TRUE))
+startdate <- ddply(df1, "EVTYPE", summarise, min = min(BGN_DATE, na.rm = TRUE))
 
 summary(startdate)
 
