@@ -1,0 +1,141 @@
+---
+title: "Storm and Weather Events with the Greatest Impact to Population Health and Economy"
+output: 
+        html_document:
+                keep_md: TRUE
+---
+
+## Synopsis
+Storms and other severe weather events can cause both public health and economic problems for communities and municipalities. Many severe events can result in fatalities, injuries, and property damage, and preventing such outcomes to the extent possible is a key concern.
+
+In this report we aim to explore the National Oceanic and Atmospheric Administration (NOAA) storm database and determine which types of events, across the United States poses the most harmful effects with respect to population health and has the greatest economic consequences.
+
+## Loading and Processing the Raw Data
+We used the Storm Data from US NOAA, it contains characteristics of major storms and weather events in the US, as well as estimates of any fatalities, injuries and property damage.
+
+First step, setting the directory and downloading the data.
+
+I presented two options on downloading and reading the data, in my case, having a slow internet connection requires downloading data into working directory than reading it from there but I also presented an alternative code, for purposes of reproducibility
+
+Option 1: Ideal option of downloading the data and unzipping the file using the R.utils package
+
+```{r}
+
+#if (!file.exists("stormdata.csv.bz2")) { download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2",destfile = "stormdata.csv.bz2", method = "curl")}
+
+#require("R.utils")
+
+#bunzip2("stormdata.csv.bz2") #unzipping downloaded data
+
+```
+
+Option 2: Due to limitations of a slow internet connection, I've opted to download the data in the working directory.
+
+```{r}
+
+#reading the data
+stormdata <- read.csv("NOAA data/repdata-data-StormData (2).csv", na.strings = "NA")
+
+#extracting Variables to be used in the study
+stormdata2 <- stormdata[,c("BGN_DATE","EVTYPE","MAG","FATALITIES","INJURIES","PROPDMG", "PROPDMGEXP","CROPDMG","CROPDMGEXP")]
+
+#converting the BGN_DATE variable to date format
+stormdata2$BGN_DATE <- as.Date(stormdata2$BGN_DATE, format = "%m/%d/%Y %H:%M:%S")
+
+```
+
+Getting summaries and structure of the data
+```{r}
+df1 <- as.data.frame(stormdata2)
+
+summary(df1)
+str(df1)
+
+#first time the event was recorded in the database
+library(plyr)
+startdate <- ddply(df1, EVTYPE, summarise, min = min(BGN_DATE, na.rm = TRUE))
+
+summary(startdate)
+
+```
+Since the results show that most of the events, were only taken in to account or was recorded at the latter part of the 90s, I decided to only take into account the data from year 2000 onwards.
+
+Subsetting the data (this also narrows down the EXP notations to more uniform range which aids to the next step of the study)
+
+```{r}
+df2 <- subset(df1, BGN_DATE >= "2000-01-01")
+summary(df2)
+
+```
+
+Duplicating the CROPDMGEXP and PROPDMGEXP, these duplicates will be recoded to their exponential/numerical equivalent to be used as multiplier to compute for the total amount of damages.
+
+```{r}
+#duplicating variables
+df2$CROPDMGEXP2 <- df2$CROPDMGEXP
+df2$PROPDMGEXP2 <- df2$PROPDMGEXP
+
+#recoding the notations to its numerical value
+df2$CROPDMGEXP2 <- as.numeric(recode(df2$CROPDMGEXP2, "'' = 1; 'B' = 1000000000; 'K' = 1000; 'M' = 1000000"))
+
+df2$PROPDMGEXP2 <- as.numeric(recode(df2$PROPDMGEXP2, "'' = 1; 'B' = 1000000000; 'K' = 1000; 'M' = 1000000"))
+
+#multiplying the two variables to calculate for total 
+df2$CROPDMG2 <- df2$CROPDMG * df2$CROPDMGEXP2
+df2$PROPDMG2 <- df2$PROPDMG * df2$PROPDMGEXP2
+
+```
+
+Computing for the total Fatalities, Injuries and Damages for each event type.
+```{r}
+totalCropDamage <- ddply(df2, "EVTYPE", summarise, total = sum(CROPDMG2, na.rm = TRUE))
+totalPropDamage <- ddply(df2, "EVTYPE", summarise, total = sum(PROPDMG2, na.rm = TRUE))
+totalInjuries <- ddply(df2, "EVTYPE", summarise, total = sum(INJURIES, na.rm = TRUE))
+totalFatalities <- ddply(df2, "EVTYPE", summarise, total = sum(FATALITIES, na.rm = TRUE))
+
+```
+
+Combining the total crop and property damages
+```{r}
+library(plyr)
+#joining
+damages <- join(totalCropDamage,totalPropDamage, by = "EVTYPE")
+
+#renaming
+names(damages) <- c("EVTYPE","totalC","totalP")
+
+#adding values of Crop and Property Damages and saving it to a new variable
+damages$totalDamages <- damages$totalC + damages$totalP
+
+```
+
+Sorting the data and extracting the top 10 results
+```{r}
+#sorting
+totalFatalities <- totalFatalities[order(totalFatalities$total, decreasing = TRUE),]
+totalInjuries <- totalFatalities[order(totalInjuries$total, decreasing = TRUE),]
+damages_sort <- damages[order(damages$totalDamages, decreasing = TRUE),]
+
+#top 10
+fatalities <- totalFatalities[1:10,]
+injuries <- totalInjuries[1:10,]
+damages1 <- damages_sort[1:10,3]
+```
+
+## Results
+
+### Top 10 Storms and Weather Events in the United States with the Most Harmful Effects to Population Health
+
+**No. of Fatalities**
+**`r fatalities`**
+
+**No. of Injuries**
+**`r injuries`**
+
+### Top 10 Storms and Weather Events in the United States with the Greatest Economic Consequences in terms of Crop and Property Damages
+
+**Total Crop and Property Damages**
+**`r damages1`**
+```{r}
+
+```
