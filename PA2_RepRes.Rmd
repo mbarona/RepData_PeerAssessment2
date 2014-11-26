@@ -121,7 +121,7 @@ damages_sort <- damages[order(damages$totalDamages, decreasing = TRUE),]
 #top 10
 fatalities <- totalFatalities[1:10,]
 injuries <- totalInjuries[1:10,]
-damages1 <- damages_sort[1:10,3]
+damages1 <- damages_sort[1:10,]
 ```
 
 ## Results
